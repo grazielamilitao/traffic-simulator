@@ -3,9 +3,12 @@ package simulator;
 public class ThreadAbastecer implements Runnable{
 
 	static int combustivel;
-	boolean trafego = true;
 	Car carro;
 	int quantCombustivel;
+	
+	public ThreadAbastecer() {
+		
+	}
 
 	public ThreadAbastecer(Car carro, int quantidade) {
 		this.carro = carro;
@@ -13,7 +16,7 @@ public class ThreadAbastecer implements Runnable{
 	}
 
 	synchronized void abastecerFabrica() {
-		while(trafego) {
+		while(true) {
 			try {
 				combustivel += 50;
 				Thread.sleep(30000);
@@ -25,29 +28,27 @@ public class ThreadAbastecer implements Runnable{
 
 	@Override
 	synchronized public void run() {
-		if(combustivel>0) {
-			while(combustivel>0) {
-				try {
-					if(quantCombustivel<combustivel) {
-						carro.setCombustivel(carro.getCombustivel()+quantCombustivel);
-						combustivel=-quantCombustivel;
-						carro.mover();
-					}
+		while(true) {
+			try {
+				while(combustivel>0) {
+					System.out.println(combustivel);
+					carro.setCombustivel(carro.getCombustivel()+quantCombustivel);
+					combustivel=-quantCombustivel;
+					carro.mover();
 					Thread.sleep(5000);
 					notify();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
 				}
-			}
-		}
-		else if(combustivel<=0) {
-			try {
-				Thread.sleep(30000);
+				if(combustivel<=0) {
+					try {
+						Thread.sleep(30000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				abastecerFabrica();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		abastecerFabrica();
 	}
-
 }

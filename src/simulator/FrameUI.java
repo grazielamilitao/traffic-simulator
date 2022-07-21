@@ -27,7 +27,7 @@ class FrameUI extends JFrame {
 	}
 
 	public static void main(String args[]) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new FrameUI().setVisible(true);
@@ -56,20 +56,32 @@ class FrameUI extends JFrame {
 		private void iniciarCarros() {
 
 			Random rand = new Random();
-			ThreadAbastecer thread = null;
-			
+
 			//Cria 10 novos carros
 			carros = new ArrayList<Car>();
 			for (int i = 0; i < 10; i++) {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
-				thread = new ThreadAbastecer(c, 20);
-				thread.run();
+
+				new Thread(new ThreadAbastecer(c,20)).start();
+
 				carros.add(c);
 			}
 
-			// TODO : Me ajude ! Meus carros não estão desenhando!!!
-			//while (true) {
+			new Thread(new Runnable(){
+				@Override
+				public void run() {
+					while(true) {
+						FrameUI.this.repaint();
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+
 			carros.forEach(c -> c.mover());
 			Panel2.this.repaint();
 			try {
@@ -77,7 +89,6 @@ class FrameUI extends JFrame {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//}
 		}
 
 		@Override
