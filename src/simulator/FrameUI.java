@@ -27,17 +27,11 @@ class FrameUI extends JFrame {
 	}
 
 	public static void main(String args[]) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new FrameUI().setVisible(true);
-				Panel2 pn = null;
-				pn.defineColor();
-				pn.iniciarCarros();
-				
-				ThreadAbastecer abastecer;
-				
-				for(Car carro: pn.carros)
-					abastecer = new ThreadAbastecer(carro, 20);
+
 			}
 		});
 	}
@@ -46,7 +40,7 @@ class FrameUI extends JFrame {
 
 		private List<Car> carros;
 
-		public Panel2() {
+		Panel2() {
 			setPreferredSize(new Dimension(800, 600));
 			iniciarCarros();
 		}
@@ -62,12 +56,15 @@ class FrameUI extends JFrame {
 		private void iniciarCarros() {
 
 			Random rand = new Random();
-
+			ThreadAbastecer thread = null;
+			
 			//Cria 10 novos carros
 			carros = new ArrayList<Car>();
 			for (int i = 0; i < 10; i++) {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
+				thread = new ThreadAbastecer(c, 20);
+				thread.run();
 				carros.add(c);
 			}
 
