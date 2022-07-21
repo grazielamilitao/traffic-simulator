@@ -5,10 +5,6 @@ public class ThreadAbastecer implements Runnable{
 	static int combustivel;
 	Car carro;
 	int quantCombustivel;
-	
-	public ThreadAbastecer() {
-		
-	}
 
 	public ThreadAbastecer(Car carro, int quantidade) {
 		this.carro = carro;
@@ -31,7 +27,6 @@ public class ThreadAbastecer implements Runnable{
 		while(true) {
 			try {
 				while(combustivel>0) {
-					System.out.println(combustivel);
 					carro.setCombustivel(carro.getCombustivel()+quantCombustivel);
 					combustivel=-quantCombustivel;
 					carro.mover();
