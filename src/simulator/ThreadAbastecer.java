@@ -12,21 +12,20 @@ public class ThreadAbastecer implements Runnable{
 	}
 
 	synchronized void abastecerFabrica() {
-		//while(true) {
-			try {
-				combustivel += 50;
-				Thread.sleep(30000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		//}
+		try {
+			//abastecer a fabrica com 50L a cada 30s
+			combustivel += 50;
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	synchronized public void run() {
-		
 		while(true) {
 			try {
+				//enquanto houver combustivel na Fabrica, abastece o carro da vez, mininui no estoque, move o carro e faz a thread esperar 5s notificando as outras
 				while(combustivel>0) {
 					carro.setCombustivel(carro.getCombustivel()+quantCombustivel);
 					combustivel=-quantCombustivel;
@@ -34,13 +33,6 @@ public class ThreadAbastecer implements Runnable{
 					Thread.sleep(5000);
 					notify();
 				}
-				/*if(combustivel<=0) {
-					try {
-						Thread.sleep(30000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}*/
 				abastecerFabrica();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

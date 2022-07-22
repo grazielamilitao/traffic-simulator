@@ -62,12 +62,14 @@ class FrameUI extends JFrame {
 			for (int i = 0; i < 10; i++) {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
-
+				
+				//criando e startando o novo objeto runnable
 				new Thread(new ThreadAbastecer(c,10)).start();
 
 				carros.add(c);
 			}
 
+			//desenhar os carros
 			new Thread(new Runnable(){
 				@Override
 				public void run() {
