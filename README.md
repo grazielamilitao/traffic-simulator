@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/36998416/180504428-c589a119-1c83-44c9-9c8b-f8d1cf4c9076.png)
 
- Exercício de conclusão da trilha de Java Aprofundamento da Five Academy envolvendo Threads.
+ Exercício 2 de conclusão da trilha de Java Aprofundamento da Five Academy envolvendo Threads.
  
  Regras do sistema:
     •  A fábrica produz 50L de combustível a cada 30 segundos
