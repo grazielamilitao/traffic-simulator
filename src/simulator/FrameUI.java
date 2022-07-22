@@ -31,7 +31,6 @@ class FrameUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new FrameUI().setVisible(true);
-				
 			}
 		});
 	}
