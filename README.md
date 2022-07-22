@@ -5,6 +5,7 @@
  Exercício 2 de conclusão da trilha de Java Aprofundamento da Five Academy envolvendo Threads.
  
  Regras do sistema:
+ 
     •  A fábrica produz 50L de combustível a cada 30 segundos
     •  Somente um carro pode ser abastecido por vez, cada carro leva 5 segundos para ser abastecido
     •  Se a fábrica está sem combustível, os carros deve ficar aguardando e serem atendidos um por vez 
