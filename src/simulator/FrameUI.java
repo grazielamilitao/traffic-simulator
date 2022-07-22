@@ -31,7 +31,7 @@ class FrameUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new FrameUI().setVisible(true);
-
+				
 			}
 		});
 	}
@@ -63,7 +63,7 @@ class FrameUI extends JFrame {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
 
-				new Thread(new ThreadAbastecer(c,20)).start();
+				new Thread(new ThreadAbastecer(c,10)).start();
 
 				carros.add(c);
 			}
@@ -74,13 +74,13 @@ class FrameUI extends JFrame {
 					while(true) {
 						FrameUI.this.repaint();
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(10);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
 				}
-			});
+			}).start();
 
 			carros.forEach(c -> c.mover());
 			Panel2.this.repaint();

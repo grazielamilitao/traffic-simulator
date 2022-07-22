@@ -12,18 +12,19 @@ public class ThreadAbastecer implements Runnable{
 	}
 
 	synchronized void abastecerFabrica() {
-		while(true) {
+		//while(true) {
 			try {
 				combustivel += 50;
 				Thread.sleep(30000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		//}
 	}
 
 	@Override
 	synchronized public void run() {
+		
 		while(true) {
 			try {
 				while(combustivel>0) {
@@ -33,13 +34,13 @@ public class ThreadAbastecer implements Runnable{
 					Thread.sleep(5000);
 					notify();
 				}
-				if(combustivel<=0) {
+				/*if(combustivel<=0) {
 					try {
 						Thread.sleep(30000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				}
+				}*/
 				abastecerFabrica();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
